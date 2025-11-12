@@ -55,3 +55,7 @@ public/temp/
 .dockerignore
 Dockerfile
 docker-compos
+
+
+# Python venvs
+**/.venv/
