@@ -1,0 +1,10 @@
+fastapi==0.95.2
+uvicorn[standard]==0.22.0
+langchain==0.0.###   # replace with the version you want; or use latest
+openai==1.0.0        # optional if using OpenAI provider
+sqlalchemy==2.0.19
+psycopg2-binary==2.9.6
+aioredis==2.0.1
+pydantic==2.1.1
+httpx==0.24.1
+python-dotenv==1.0.0
