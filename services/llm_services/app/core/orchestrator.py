@@ -1,7 +1,7 @@
 import uuid
 import time
 from sqlalchemy.orm import Session
-from .models.metrics import LLMRequestMetric
+from app.models.metrics import LLMRequestMetric
 from .deps import get_db
 
 def log_llm_request(
