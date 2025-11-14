@@ -14,7 +14,9 @@ class LLMRequestMetric(Base):
     cost_usd = Column(Float, default=0.0)
     latency_ms = Column(Float, default=0.0)
     status = Column(String(32), default="success")
-    metadata = Column(JSON, nullable=True)
+    # metadata = Column(JSON, nullable=True)
+    meta = Column("metadata", JSON, nullable=True) 
     prompt_preview = Column(Text, nullable=True)
     cached = Column(Integer, default=0)
     created_at = Column(DateTime, default=datetime.utcnow)
+
