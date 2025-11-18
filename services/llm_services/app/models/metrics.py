@@ -1,7 +1,8 @@
 # services/llm_services/app/models/metrics.py
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, Float, DateTime, JSON, Text
+from sqlalchemy import Column, Integer, String, Float, DateTime, JSON, Text, Boolean
 from app.db.session import Base
+
 
 class LLMRequestMetric(Base):
     __tablename__ = "llm_request_metrics"
@@ -17,6 +18,7 @@ class LLMRequestMetric(Base):
     # metadata = Column(JSON, nullable=True)
     meta = Column("metadata", JSON, nullable=True) 
     prompt_preview = Column(Text, nullable=True)
-    cached = Column(Integer, default=0)
+    # cached = Column(Integer, default=0)
+    cached = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
