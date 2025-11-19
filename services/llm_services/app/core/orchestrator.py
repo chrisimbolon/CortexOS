@@ -1,11 +1,13 @@
 # services/llm_services/app/core/orchestrator.py
 
-from openai import OpenAI
+from groq import Groq
 from app.core.costs import estimate_cost
 from app.core.metrics_logger import save_metric
 import time
+import os
 
-client = OpenAI()
+# Load Groq client
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 class Orchestrator:
     async def run_model(self, model: str, prompt: str, variables: dict):
