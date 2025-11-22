@@ -1,7 +1,5 @@
 # services/llm_services/app/core/costs.py
 
-# services/llm_services/app/core/costs.py
-
 # OpenAI pricing — update anytime
 MODEL_PRICES = {
     "gpt-4o": {
