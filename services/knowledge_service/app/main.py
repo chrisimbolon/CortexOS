@@ -1,11 +1,13 @@
+# knowledge_service/app/main.py
+
 from fastapi import FastAPI
-from app.routes import query, ingest
+from app.api.routes import router as api_router
 
 app = FastAPI(title="CortexOS Knowledge Service")
 
-app.include_router(query.router, prefix="/query", tags=["Query"])
-app.include_router(ingest.router, prefix="/ingest", tags=["Ingest"])
+# Mount all routes
+app.include_router(api_router, prefix="/api")
 
 @app.get("/health")
-def health_check():
+async def health_check():
     return {"status": "ok", "service": "knowledge_service"}
