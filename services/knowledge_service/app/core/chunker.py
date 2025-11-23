@@ -1,24 +1,29 @@
-# app/core/chunker.py
+# knowledge_service/app/core/chunker.py
+
+# knowledge_service/app/core/chunker.py
 
 from typing import List
+from app.core.config import settings
 
 
-def chunk_text(
-    text: str,
-    chunk_size: int = 800,
-    overlap: int = 100
-) -> List[str]:
+def chunk_text(text: str, chunk_size: int = None, overlap: int = None) -> List[str]:
     """
-    Splits text into overlapping chunks.
+    Split text into overlapping chunks.
 
     Args:
-        text (str): Raw text to split.
-        chunk_size (int): Max characters per chunk.
-        overlap (int): How many characters adjacent chunks share.
+        text (str): The raw text to chunk.
+        chunk_size (int, optional): Size of each chunk. Defaults to settings.CHUNK_SIZE.
+        overlap (int, optional): Number of characters overlapping between chunks.
+                                 Defaults to settings.CHUNK_OVERLAP.
 
     Returns:
-        List[str]: List of text chunks.
+        List[str]: A list of text chunks.
     """
+    # Use defaults from settings if not provided
+    if chunk_size is None:
+        chunk_size = settings.CHUNK_SIZE
+    if overlap is None:
+        overlap = settings.CHUNK_OVERLAP
 
     if chunk_size <= overlap:
         raise ValueError("chunk_size must be larger than overlap")
@@ -34,7 +39,6 @@ def chunk_text(
         if chunk:
             chunks.append(chunk)
 
-        # Move forward with overlap
         start += chunk_size - overlap
 
     return chunks
