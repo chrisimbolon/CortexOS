@@ -1,0 +1,60 @@
+
+services:
+  # -----------------------------
+  # PostgreSQL + PGVector
+  # -----------------------------
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: cortex_pg
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # -----------------------------
+  # LLM Service
+  # -----------------------------
+  llm_service:
+    build:
+      context: ./services/llm_service
+      dockerfile: Dockerfile
+    container_name: llm_service
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASS}@postgres:5432/${DB_NAME}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8100:8000"     # external:internal
+
+  # -----------------------------
+  # Knowledge Service
+  # -----------------------------
+  knowledge_service:
+    build:
+      context: ./services/knowledge_service
+      dockerfile: Dockerfile
+    container_name: knowledge_service
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASS}@postgres:5432/${DB_NAME}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8200:8000"     # external:internal
+
+volumes:
+  pgdata:
