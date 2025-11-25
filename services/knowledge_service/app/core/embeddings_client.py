@@ -7,7 +7,7 @@ import httpx
 from app.core.config import settings
 
 EMBEDDINGS_PATH = "/api/embeddings"  # endpoint at embeddings service expected
-EMBEDDINGS_URL = os.getenv("EMBEDDINGS_SERVICE_URL", settings.EMBEDDINGS_SERVICE_URL)
+EMBEDDINGS_URL = os.getenv("EMBEDDING_SERVICE_URL", settings.EMBEDDING_SERVICE_URL)
 DEFAULT_TIMEOUT = 30.0
 BATCH_SIZE = int(os.getenv("EMBEDDINGS_BATCH_SIZE", 32))
 
