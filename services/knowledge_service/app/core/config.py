@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     CHUNK_SIZE: int = Field(800, env="CHUNK_SIZE")
     CHUNK_OVERLAP: int = Field(100, env="CHUNK_OVERLAP")
 
+    DATABASE_URL: str = "postgresql+psycopg://postgres:password@localhost:5432/cortex_os"
+
+
     class Config:
         env_file = ".env"
 
