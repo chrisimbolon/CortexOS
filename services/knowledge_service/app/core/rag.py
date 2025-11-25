@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 import uuid
 import os
 from app.core.chunker import chunk_text
-from app.embeddings_client import get_embeddings
+from app.core.embeddings_client import get_embedding, get_embeddings
 from app.core.vector_store import VectorStore
 from app.core.config import settings
 import httpx
