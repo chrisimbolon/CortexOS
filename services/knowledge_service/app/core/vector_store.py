@@ -36,7 +36,7 @@ if USE_PGVECTOR:
         id = Column(Integer, primary_key=True, index=True)
         source = Column(String(255), nullable=True)
         text = Column(Text, nullable=False)
-        metadata = Column(Text, nullable=True)  # store JSON string
+        meta = Column(Text, nullable=True)  # store JSON string
         # embedding = Column(Vector(dimensions=1536), nullable=False)  # adjust dims if needed
         embedding = Column(Vector(1536), nullable=False)
 
